@@ -31,6 +31,16 @@ public class UsuarioFacade extends AbstractFacade<Persona> implements UsuarioFac
         super(Persona.class);
     }
 
+    /**
+     * Metodo el cual realiza la consulta en la base de datos del usuario. Se
+     * realiza la consulta enviando los parametros que vienen del controlador y
+     * guardamos el resultado de la consulta en una lista. Si la lista no esta
+     * vacia nos posicionamos en la posicion 0 para obtener el resultado de la
+     * consulta
+     *
+     * @param usu Parametros que vienen del controller
+     * @return Retornamos el objeto Persona
+     */
     @Override
     public Persona Login(Persona usu) {
         Persona usuario = null;

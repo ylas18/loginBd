@@ -23,37 +23,76 @@ import javax.servlet.http.HttpSession;
 @Named(value = "controllerLogin")
 @SessionScoped
 public class ControllerLogin implements Serializable {
+    /*
+     Creamos la el objeto UsuarioFacadeLocal para realziar la concexion al EJB
+     */
 
     @EJB(beanName = "UsuarioFacade")
     private UsuarioFacadeLocal usuarioFacadeLocal;
-
+    /**
+     * Creamos el objeto Persona para enviar los datos al EJB
+     */
     private Persona usuario;
+    /*
+     Creamos el objeto persona para poder realizar las validaciones del rol con lo que viene del EJB
+     */
     private Persona usu;
+    /*
+     Lectura del UsuarioFacadeLocal
+     */
 
     public UsuarioFacadeLocal getUsuarioFacadeLocal() {
         return usuarioFacadeLocal;
     }
 
+    /**
+     * Escritura del UsuarioFacadeLocal
+     *
+     * @param usuarioFacadeLocal
+     */
     public void setUsuarioFacadeLocal(UsuarioFacadeLocal usuarioFacadeLocal) {
         this.usuarioFacadeLocal = usuarioFacadeLocal;
     }
 
+    /**
+     * Lectura del objeto Persona
+     *
+     * @return
+     */
     public Persona getUsuario() {
         return usuario;
     }
 
+    /**
+     * Escritura del objeto Persona
+     *
+     * @param usuario
+     */
     public void setUsuario(Persona usuario) {
         this.usuario = usuario;
     }
 
+    /**
+     * Lectura del objeto Persona
+     *
+     * @return
+     */
     public Persona getUsu() {
         return usu;
     }
 
+    /**
+     * Escritura del objeto Persona
+     *
+     * @param usu
+     */
     public void setUsu(Persona usu) {
         this.usu = usu;
     }
 
+    /**
+     * Post Constuct que inicializa los objetos para poder usarlos
+     */
     @PostConstruct
     public void init() {
         usuario = new Persona();
@@ -63,6 +102,14 @@ public class ControllerLogin implements Serializable {
     public ControllerLogin() {
     }
 
+    /**
+     * Metodo el cual realiza el Login. Hacemos la concexion a base de datos por
+     * medio del EJB el cual nos retorna un objeto de tipo Persona y se valida
+     * si esta vacio. Al no ser asi creamos la session y validamos el rol para
+     * redireccion del usuario como tal
+     *
+     * @return
+     */
     public String empezarLogin() {
         String redireccion = "index";
         try {
